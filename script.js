@@ -5,7 +5,7 @@
 const account1 = {
   owner: 'Nicholas Lindau',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-  interestRate: 1.2, // %
+  interestRate: 1.2, 
   pin: 1111,
 };
 
@@ -58,12 +58,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+
+// Function for displaying rows of deposits/withdrawls
 const displayMovements = function(movements) {
   containerMovements.innerHTML = '';
-
   movements.forEach(function(mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal'
-
     const html = `
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
@@ -74,3 +74,17 @@ const displayMovements = function(movements) {
   });
 };
 displayMovements(account1.movements);
+
+// Function for creating usernames based off user's initials
+const createUsernames = function(accs) {
+  accs.forEach(function(acc) {
+    acc.username = acc.owner
+    .toLowerCase()
+    .split(' ')
+    .map(e => e[0])
+    .join('');
+  });
+};
+
+createUsernames(accounts)
+console.log(accounts);
