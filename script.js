@@ -86,5 +86,13 @@ const createUsernames = function(accs) {
   });
 };
 
-createUsernames(accounts)
-console.log(accounts);
+// Function for displaying total account balance
+createUsernames(accounts);
+const calcDisplayBalance = function(movements) {
+  const balance = movements.reduce(function(acc, mov) {
+    return acc + mov
+  }, 0);
+  labelBalance.textContent = `${balance} EUR`
+};
+
+calcDisplayBalance(account1.movements)
