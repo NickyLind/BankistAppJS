@@ -67,7 +67,7 @@ const displayMovements = function(movements) {
     const html = `
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-      <div class="movements__value">${mov}</div>
+      <div class="movements__value">${mov}€</div>
     </div>
     `
     containerMovements.insertAdjacentHTML('afterbegin', html)
@@ -92,7 +92,30 @@ const calcDisplayBalance = function(movements) {
   const balance = movements.reduce(function(acc, mov) {
     return acc + mov
   }, 0);
-  labelBalance.textContent = `${balance} EUR`
+  labelBalance.textContent = `${balance}€`
 };
 
 calcDisplayBalance(account1.movements)
+
+
+// Function for displaying account summary
+const calcDisplaySummary = function(movements){
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0)
+  labelSumIn.textContent = `${incomes}€`
+
+  const out = movements
+  .filter(mov => mov < 0)
+  .reduce((acc, mov) => acc - mov, 0)
+  labelSumOut.textContent = `${out}€`
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => deposit * 1.2/100)
+    .filter((int, i, array) => int >= 1
+    )
+    .reduce((acc, int) => acc + int, 0)
+  labelSumInterest.textContent = `${interest}€`
+}
+calcDisplaySummary(account1.movements)
