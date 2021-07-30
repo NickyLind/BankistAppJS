@@ -88,7 +88,6 @@ createUsernames(accounts);
 const formatMovementDate = function(date, locale) {
   const calcDaysPassed = (date1, date2) => Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
   const daysPassed = calcDaysPassed(new Date(), date)
-  console.log(daysPassed);
   if(daysPassed === 0) return 'Today';
   if(daysPassed === 1) return 'Yesterday';
   if(daysPassed <= 7) return `${daysPassed} days ago`
@@ -296,7 +295,6 @@ btnClose.addEventListener('click', function(event){
 
   if(inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin){
     const index = accounts.findIndex(acc => acc.username === currentAccount.username)
-    console.log(index);
 
     //Delete Account
     accounts.splice(index, 1);
@@ -312,5 +310,3 @@ btnSort.addEventListener('click', function(event) {
   displayMovements(currentAccount, !sorted)
   sorted = !sorted
 });
-
-console.log(accounts);
