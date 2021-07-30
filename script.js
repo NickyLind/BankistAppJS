@@ -170,11 +170,31 @@ const updateUI = function(acc){
   
       //Display summary
       calcDisplaySummary(acc)
-}
+};
+
+const startLogOutTimer = () => {
+  const tick = () => {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    labelTimer.textContent = `${min}:${sec}`;
+    
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
+    time--;
+  }
+  let time = 100;
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
 
 
 //Event handler
-let currentAccount;
+let currentAccount, timer;
 
 // //TODO Temp LOGGED IN
 // currentAccount = account1
@@ -208,10 +228,17 @@ btnLogin.addEventListener('click', function(event){
 
     //Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
-    inputLoginPin.blur()
+    inputLoginPin.blur();
+
+    // Timer
+    if (timer) clearInterval(timer);
+
+    //Start Logout Timer
+    timer = startLogOutTimer();
 
     //Update UI
     updateUI(currentAccount)
+
   }
 });
 
@@ -235,6 +262,10 @@ btnTransfer.addEventListener('click', function(event){
 
       // Update UI
       updateUI(currentAccount)
+
+      //Reset Timer
+      clearInterval(timer);
+      timer = startLogOutTimer()
   }
 });
 
@@ -251,7 +282,11 @@ btnLoan.addEventListener('click', function(event){
 
     //Update UI
     updateUI(currentAccount)
+
   }, 2500)}
+  //Reset Timer
+  clearInterval(timer);
+  timer = startLogOutTimer();
   inputLoanAmount.value = '';
 });
 
