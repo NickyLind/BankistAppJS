@@ -21,3 +21,6 @@ this is due to the fact that these two pieces of data are in two seperate arrays
 reset with a keystroke or mouse movement in a larger application
 - there is no error or warning message for incorrect login information or a way to create new users. This is due to the fact that it seemed silly to create this functionality for 
 hardcoded data that's simply used to showcase some vanilla JS skills that isn't connected to any sort of backend.
+
+## **_Setup_** 
+simply copy this repo into the desired directory on your local system and open it with your favorite editor. My recommended method to run the app is to use Live Server from [Visual Studio Code](https://code.visualstudio.com/) and right click the index.html file to start a live server.
